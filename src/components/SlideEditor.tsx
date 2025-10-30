@@ -236,18 +236,19 @@ export const SlideEditor = () => {
                           ? "Edit slide 2: change title to 'New Title' or 'Add chart about sales'..."
                           : "Start with a topic, we'll turn it into slides! (e.g., The Future of Remote Work)"
                       }
-                      className={`w-full pt-5 pb-3 px-5 text-sm text-gray-900 bg-transparent resize-none min-h-[100px] max-h-60 focus:outline-none rounded-t-2xl ${
+                      className={`w-full pt-5 pb-3 px-5 text-sm text-gray-900 bg-transparent resize-none min-h-[100px] max-h-60 focus:outline-none rounded-t-2xl caret-black focus:ring-1 focus:ring-blue-400 ${
                         errors.prompt ? "border-red-500" : ""
                       }`}
                       disabled={isLoading}
                     />
+
                     {errors.prompt && (
                       <p className="text-red-500 text-xs px-5 pt-1">
                         {errors.prompt.message}
                       </p>
                     )}
 
-                    <div className="flex justify-between items-center px-5 py-3.5 border-t border-gray-100 rounded-b-2xl">
+                    <div className="flex justify-between items-center px-1 py-1.5 pb-0 border-t border-gray-100 rounded-b-2xl">
                       <div className="flex items-center gap-2 flex-1">
                         <label className="cursor-pointer p-2 border border-gray-200 rounded-lg hover:bg-gray-100">
                           <input
