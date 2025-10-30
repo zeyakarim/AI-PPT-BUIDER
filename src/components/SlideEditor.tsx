@@ -34,7 +34,7 @@ export const SlideEditor = () => {
     try {
       const newPresentation = await generatePresentation(
         data.prompt,
-        currentPresentation,
+        currentPresentation ?? undefined,
         selectedFiles.length > 0 ? selectedFiles : undefined,
         model
       );
