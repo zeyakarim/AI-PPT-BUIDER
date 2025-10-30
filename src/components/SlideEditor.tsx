@@ -165,7 +165,12 @@ export const SlideEditor = () => {
                           {slide.title}
                         </h4>
                         <ul className="list-disc ml-5 text-sm text-gray-700 mt-1">
-                          {slide.content?.map((item: any, i) => (
+                          {(Array.isArray(slide.content)
+                            ? slide.content
+                            : slide.content
+                            ? [slide.content]
+                            : []
+                          ).map((item: string, i: number) => (
                             <li key={i}>{item}</li>
                           ))}
                         </ul>
@@ -312,7 +317,6 @@ export const SlideEditor = () => {
                         </div>
                       </div>
 
-                      {/* Right: Template + Submit */}
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
