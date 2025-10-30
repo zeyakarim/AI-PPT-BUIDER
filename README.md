@@ -118,7 +118,7 @@ No backend required — **100% client-side** with secure API key handling via en
 
 1.  **Clone the repo:**
     ```bash
-    git clone [https://github.com/yourusername/ai-ppt-builder.git](https://github.com/yourusername/ai-ppt-builder.git)
+    git clone (https://github.com/zeyakarim/AI-PPT-BUIDER.git)
     cd ai-ppt-builder
     ```
 2.  **Install dependencies:**
