@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# AI PPT Builder  
+*A full-stack AI-powered presentation generator for creating professional slides instantly.*
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Demo
+| Component | Live URL |
+| :--- | :--- |
+| **Frontend** | [![Vercel](https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=Vercel&logoColor=white)](https://ai-ppt-buider.vercel.app/) |
 
-Currently, two official plugins are available:
+---
+## Table of Contents
+- [Project Overview](#-project-overview)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Getting Started](#-getting-started)
+- [API Integration](#-api-integration)
+- [Deployment](#-deployment)
+---
+## Project Overview
+AI PPT Builder is a modern, full-stack web application that leverages **Google Gemini AI** to generate professional PowerPoint presentations from natural language prompts. Users can input topics, upload images, and instantly receive downloadable `.pptx` files with structured slides.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Built with **TypeScript**, **React**, **Vite**, and **Tailwind CSS**, it emphasizes performance, type safety, and an intuitive user experience.
 
-## React Compiler
+## Features
+- **AI-Powered Slide Generation:** Enter a topic → get a full presentation in seconds  
+- **Image Upload & Analysis:** Upload up to 5 images; AI analyzes and integrates insights  
+- **Edit Existing Slides:** Refine or expand generated presentations  
+- **PPTX Export:** One-click download of fully formatted PowerPoint files  
+- **Model Selection:** Choose between **Gemini 2.5 Flash** and **1.5 Pro**  
+- **Enter to Generate:** Press **Shift + Enter** or **Ctrl + Enter** to generate  
+- **Responsive Design:** Mobile & desktop optimized with Tailwind CSS  
+- **Type-Safe:** End-to-end TypeScript + Zod validation  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
+## Architecture
+### Frontend (React + Vite + TypeScript)
+A fast, modern SPA with:
+- **Framework**: React 18
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Form Handling**: React Hook Form + Zod
+- **AI Integration**: Direct calls to Google Gemini API
+- **PPTX Generation**: `pptxgenjs` (client-side)
 
-## Expanding the ESLint configuration
+### Backend
+No backend required — **100% client-side** with secure API key handling via environment variables.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+> **Security Note**: Gemini API key is stored in `VITE_GEMINI_API_KEY` and used only in the browser (standard for AI tools like this).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### AI Model
+- **Provider**: Google Gemini (via `@google/generative-ai`)
+- **Models**: `gemini-2.5-flash`, `gemini-1.5-pro`
+- **Output**: Structured JSON → converted to PPTX
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Architecture Diagram
+```mermaid
+graph TD
+    A[User] --> B[Frontend - React/Vite]
+    B --> C[Google Gemini API]
+    C --> D[Structured JSON Response]
+    D --> B
+    B --> E[pptxgenjs → .pptx Download]
